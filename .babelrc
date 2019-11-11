@@ -1,0 +1,15 @@
+{
+    "presets": [
+        "react",
+        [
+            "env",
+            {
+                "targets": {
+                    "browser": "last 2 version"
+                },
+                "loose": true,
+                "modules": false
+            }
+        ]
+    ]
+}
