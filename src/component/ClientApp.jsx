@@ -1,24 +1,20 @@
 import React from "react";
 import { render } from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Landing from "./Landing";
+import Search from "./Search";
+import Pagenf from "./PageNotFound";
 
-const ce = React.createElement;
+const App = () => (
+  <BrowserRouter>
+    <div className="app">
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/search" component={Search} />
+        <Route component={Pagenf} />
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
 
-const Mytitle = function(props) {
-  return ce(
-    "div",
-    null,
-    ce("h1", { style: { color: props.color } }, props.title)
-  );
-};
-
-const MyfirstComponent = function() {
-  return ce(
-    "div",
-    null,
-    ce(Mytitle, { title: "the", color: "yellowGreen" }),
-    ce(Mytitle, { title: "best", color: "GreenYellow" }),
-    ce(Mytitle, { title: "start", color: "Lime" })
-  );
-};
-
-render(ce(MyfirstComponent), document.getElementById("app"));
+render(<App />, document.getElementById("app"));
