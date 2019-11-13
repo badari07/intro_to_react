@@ -1,22 +1,17 @@
 {
-    "extends": [
-        "airbnb",
-        "prettier",
-        "prettier/react"
-    ],
-    "plugins": [
-        "prettier"
-    ],
-    "perserOption": {
-        "ecmaVersion": 2016,
-        "sourceType": "module",
-        "ecmaFetures": {
-            "jsx": true
-        }
-    },
-    "env": {
-        "es6": true,
-        "browser": true,
-        "node": true
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "perserOption": {
+    "ecmaVersion": 2016,
+    "sourceType": "module",
+    "ecmaFetures": {
+      "jsx": true
     }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  }
 }
