@@ -8,6 +8,7 @@ class Search extends React.Component {
   };
   handleSearchTermChange = e => {
     this.setState({ searchTerm: e.target.value });
+    e.PreventDefault();
   };
   render() {
     return (

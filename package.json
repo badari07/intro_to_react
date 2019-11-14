@@ -3,9 +3,16 @@
     "api": "node ratingsAPI.js",
     "build": "webpack",
     "dev": "webpack-dev-server",
+    "test": "jest",
+    "test_update": "jest -u",
     "watch": "webpack --watch",
     "formate": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"js/**/*.{js,jsx}\"",
     "lint": "eslint **/*.{js,jsx} --quiet"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "jest-serializer-enzyme"
+    ]
   },
   "dependencies": {
     "axios": "0.16.1",
