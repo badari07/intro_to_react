@@ -1,12 +1,16 @@
 //  @flow
 
 import React from "react";
-import preLoad from "../../data.json";
 import ShowCard from "./ShowCard";
+import Header from "./Header";
 
 class Search extends React.Component {
   state = {
     searchTerm: ""
+  };
+
+  props: {
+    shows: Array<Show>
   };
   handleSearchTermChange = (
     e: SyntheticKeyboardEvent & { target: HTMLInputElement }
@@ -16,17 +20,13 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search">
-        <header>
-          <h1>svideo</h1>
-          <input
-            value={this.state.searchTerm}
-            type="text"
-            placeholder="Search"
-            onChange={this.handleSearchTermChange}
-          />
-        </header>
+        <Header
+          searchTerm={this.state.searchTerm}
+          handleSearchTermChange={this.handleSearchTermChange}
+          showSearch
+        />
         <div>
-          {preLoad.shows
+          {this.props.shows
             .filter(
               show =>
                 `${show.title}${show.description}`
