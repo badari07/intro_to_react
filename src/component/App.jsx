@@ -9,30 +9,58 @@ import Pagenf from "./PageNotFound";
 import Details from "./Details";
 import preload from "../../data.json";
 
-const App = () => (
-  <BrowserRouter>
-    <div className="app">
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route
-          path="/search"
-          component={props => <Search {...props} shows={preload.shows} />}
-        />
-        <Route
-          path="/details/:id"
-          component={(props: { match: Match }) => (
-            <Details
-              {...props}
-              show={preload.shows.find(
-                (show: Show) => props.match.params.id === show.imdbID
+class App extends React.Component {
+  // state = {
+  //   searchTerm: ""
+  // };
+  // props: {
+  //   shows: Array<Show>
+  // };
+  // handleSearchTermChange =(
+  //     e: SyntheticKeyboardEvent & { target: HTMLInputElement }
+  //   ) => {
+  //   this.setState({ searchTerm: e.target.value });
+  // };
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="app">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              // component={props => (
+              //   <Landing {...props} searchTerm={this.state.searchTerm} />
+              // )}
+              component={Landing}
+            />
+            <Route
+              path="/search"
+              component={props => (
+                <Search
+                  {...props}
+                  shows={preload.shows}
+                  // searchTerm={this.state.searchTerm}
+                />
               )}
             />
-          )}
-        />
-        <Route component={Pagenf} />
-      </Switch>
-    </div>
-  </BrowserRouter>
-);
+            <Route
+              path="/details/:id"
+              component={(props: { match: Match }) => (
+                <Details
+                  {...props}
+                  show={preload.shows.find(
+                    (show: Show) => props.match.params.id === show.imdbID
+                  )}
+                />
+              )}
+            />
+            <Route component={Pagenf} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
 
 export default App;

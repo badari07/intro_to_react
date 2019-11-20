@@ -24,6 +24,7 @@ class Search extends React.Component {
           searchTerm={this.state.searchTerm}
           handleSearchTermChange={this.handleSearchTermChange}
           showSearch
+          // {...this.props}
         />
         <div>
           {this.props.shows
