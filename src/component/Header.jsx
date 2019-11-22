@@ -1,11 +1,13 @@
 // @flow
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSearchTerm } from "../action/actionCreaters";
 
 const Header = (props: {
   showSearch?: boolean,
-  handleSearchTermChange?: Function,
-  searchTerm?: string
+  handleSearchTermChange: Function,
+  searchTerm: string
 }) => {
   let utilSpace;
   if (props.showSearch) {
@@ -35,47 +37,17 @@ const Header = (props: {
 };
 
 Header.defaultProps = {
-  showSearch: false,
-  handleSearchTermChange: function noop() {},
-  searchTerm: ""
+  showSearch: false
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm
+});
 
-// class Header extends React.Component {
-//   render() {
-//     let utilSpace;
-//     if (this.props.showSearch) {
-//       utilSpace = (
-//         <input
-//           value={this.props.searchTerm}
-//           type="text"
-//           placeholder="Search"
-//           onChange={this.props.handleSearchTermChange}
-//         />
-//       );
-//     } else {
-//       utilSpace = (
-//         <h2>
-//           <Link to="/search">Back</Link>
-//         </h2>
-//       );
-//     }
-//     return (
-//       <header>
-//         <h1>
-//           <Link to="/">svedio</Link>
-//         </h1>
-//         {utilSpace}
-//       </header>
-//     );
-//   }
-// }
+const mapDispatchToProps = (dipatch: Function) => ({
+  handleSearchTermChange(e) {
+    dipatch(setSearchTerm(e.target.value));
+  }
+});
 
-// Header.defaultProps = {
-//   showSearch: false,
-//   handleSearchTermChange: function noop() {},
-//   searchTerm: ""
-// };
-
-// export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
