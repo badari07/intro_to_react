@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import { Unwrapped as UnwrappedSearch } from "../component/Search";
 import ShowCard from "../component/ShowCard";
