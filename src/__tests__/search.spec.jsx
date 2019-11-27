@@ -1,19 +1,23 @@
 import React from "react";
-import Search from "../component/Search";
+import { Unwrapped as UnwrappedSearch } from "../component/Search";
 import ShowCard from "../component/ShowCard";
-import preLoad from "../../data.json";
+import preload from "../../data.json";
 import { shallow } from "enzyme";
 
 test("search render correctly", () => {
-  const component = shallow(<Search />);
+  const component = shallow(
+    <UnwrappedSearch shows={preload.shows} searchTerm="" />
+  );
   expect(component).toMatchSnapshot();
 });
 
 test("search should render correct amount of shows based on search term", () => {
   const searchWord = "black";
-  const component = shallow(<Search />);
-  component.find("input").simulate("change", { target: { value: searchWord } });
-  const showCount = preLoad.shows.filter(
+  const component = shallow(
+    <UnwrappedSearch shows={preload.shows} searchTerm={searchWord} />
+  );
+  // component.find("input").simulate("change", { target: { value: searchWord } });
+  const showCount = preload.shows.filter(
     show =>
       `${show.title}${show.description}`
         .toUpperCase()
@@ -23,6 +27,8 @@ test("search should render correct amount of shows based on search term", () => 
 });
 
 test("search should reander correct number of shows ", () => {
-  const component = shallow(<Search />);
-  expect(component.find(ShowCard).length).toEqual(preLoad.shows.length);
+  const component = shallow(
+    <UnwrappedSearch shows={preload.shows} searchTerm="" />
+  );
+  expect(component.find(ShowCard).length).toEqual(preload.shows.length);
 });

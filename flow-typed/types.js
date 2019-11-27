@@ -11,5 +11,14 @@ export type Show = {
   year: string,
   imdbID: string,
   poster: string,
-  trailer: string
+  trailer: string,
+  rating?: string
 };
+
+declare type ActionType = "SET_SEARCH_TERM" | "ADD_API_DATE";
+
+declare type ActionT<A: ActionType, P> = {| type: A, payload: P |};
+
+export type Action =
+  | ActionT<"SET_SEARCH_TERM", string>
+  | ActionT<"ADD_API_DATE", show>;

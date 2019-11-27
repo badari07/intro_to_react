@@ -11,6 +11,7 @@ import Details from "./Details";
 import preload from "../../data.json";
 import store from "../store/configstore";
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   // state = {
   //   searchTerm: ""
@@ -53,6 +54,7 @@ class App extends React.Component {
               />
               <Route
                 path="/details/:id"
+                // eslint-disable-next-line react/no-unused-prop-types
                 component={(props: { match: Match }) => (
                   <Details
                     {...props}
