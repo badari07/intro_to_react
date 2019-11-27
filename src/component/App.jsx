@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import type { Match } from "react-router-dom";
 import Landing from "./Landing";
 import Search from "./Search";
@@ -26,49 +26,47 @@ class App extends React.Component {
   // };
   render() {
     return (
-      <BrowserRouter>
-        <Provider store={store}>
-          <div className="app">
-            <Switch>
-              <Route
-                exact
-                path="/"
-                // component={props => (
-                //   <Landing
-                //     {...props}
-                //     searchTerm={this.state.searchTerm}
-                //     handleSearchTermChange={this.handleSearchTermChange}
-                //   />
-                // )}
-                component={Landing}
-              />
-              <Route
-                path="/search"
-                component={props => (
-                  <Search
-                    {...props}
-                    shows={preload.shows}
-                    // searchTerm={this.state.searchTerm}
-                  />
-                )}
-              />
-              <Route
-                path="/details/:id"
-                // eslint-disable-next-line react/no-unused-prop-types
-                component={(props: { match: Match }) => (
-                  <Details
-                    {...props}
-                    show={preload.shows.find(
-                      (show: Show) => props.match.params.id === show.imdbID
-                    )}
-                  />
-                )}
-              />
-              <Route component={Pagenf} />
-            </Switch>
-          </div>
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <div className="app">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              // component={props => (
+              //   <Landing
+              //     {...props}
+              //     searchTerm={this.state.searchTerm}
+              //     handleSearchTermChange={this.handleSearchTermChange}
+              //   />
+              // )}
+              component={Landing}
+            />
+            <Route
+              path="/search"
+              component={props => (
+                <Search
+                  {...props}
+                  shows={preload.shows}
+                  // searchTerm={this.state.searchTerm}
+                />
+              )}
+            />
+            <Route
+              path="/details/:id"
+              // eslint-disable-next-line react/no-unused-prop-types
+              component={(props: { match: Match }) => (
+                <Details
+                  {...props}
+                  show={preload.shows.find(
+                    (show: Show) => props.match.params.id === show.imdbID
+                  )}
+                />
+              )}
+            />
+            <Route component={Pagenf} />
+          </Switch>
+        </div>
+      </Provider>
     );
   }
 }

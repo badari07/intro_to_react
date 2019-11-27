@@ -4,6 +4,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server",
     "test": "jest",
+    "start": "NODE_ENV=server node server/server.js",
     "test_update": "jest -u",
     "test_coverage": "jest --coverage",
     "watch": "webpack --watch",
