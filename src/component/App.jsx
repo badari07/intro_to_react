@@ -4,10 +4,8 @@ import React from "react";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import type { Match } from "react-router-dom";
-import Landing from "./Landing";
-import Search from "./Search";
+import AsyncRoute from "./AsyncRoute";
 import Pagenf from "./PageNotFound";
-import Details from "./Details";
 import preload from "../../data.json";
 import store from "../store/configstore";
 
@@ -32,16 +30,26 @@ class App extends React.Component {
             <Route
               exact
               path="/"
-              // component={props => (
-              //   <Landing
-              //     {...props}
-              //     searchTerm={this.state.searchTerm}
-              //     handleSearchTermChange={this.handleSearchTermChange}
-              //   />
-              // )}
-              component={Landing}
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  loadingPromise={import("./Landing")}
+                />
+              )}
             />
-            <Route
+            {/* <Route
+              // exact
+              // path="/"
+              // // component={props => (
+              // //   <Landing
+              // //     {...props}
+              // //     searchTerm={this.state.searchTerm}
+              // //     handleSearchTermChange={this.handleSearchTermChange}
+              // //   />
+              // // )}
+              // component={Landing}
+            /> */}
+            {/* <Route
               path="/search"
               component={props => (
                 <Search
@@ -50,8 +58,35 @@ class App extends React.Component {
                   // searchTerm={this.state.searchTerm}
                 />
               )}
+            /> */}
+            <Route
+              path="/search"
+              component={props => (
+                <AsyncRoute
+                  loadingPromise={import("./Search")}
+                  props={Object.assign({ shows: preload.shows }, props)}
+                />
+              )}
             />
             <Route
+              path="/details/:id"
+              // eslint-disable-next-line react/no-unused-prop-types
+              component={(props: { match: Match }) => {
+                const selectedShow = preload.shows.find(
+                  (show: Show) => props.match.params.id === show.imdbID
+                );
+                return (
+                  <AsyncRoute
+                    loadingPromise={import("./Details")}
+                    props={Object.assign(
+                      { show: selectedShow, match: {} },
+                      props
+                    )}
+                  />
+                );
+              }}
+            />
+            {/* <Route
               path="/details/:id"
               // eslint-disable-next-line react/no-unused-prop-types
               component={(props: { match: Match }) => (
@@ -62,7 +97,7 @@ class App extends React.Component {
                   )}
                 />
               )}
-            />
+            /> */}
             <Route component={Pagenf} />
           </Switch>
         </div>

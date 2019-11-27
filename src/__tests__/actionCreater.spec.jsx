@@ -1,11 +1,8 @@
 // @flow
 
 import moxios from "moxios";
-import {
-  setSearchTerm,
-  addApiData,
-  getApiDetails
-} from ".././action/actionCreaters";
+import { setSearchTerm, addApiData } from ".././action/actionCreaters";
+import getApiDetails from ".././action/asyncAction";
 
 const strangerThings = {
   title: "Billions",
